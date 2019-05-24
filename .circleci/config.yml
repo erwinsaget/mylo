@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   backend:
     docker:
-      - image: circleci/node-lts
+      - image: circleci/node:lts
     steps:
       - checkout
       - run: echo "A first hello"

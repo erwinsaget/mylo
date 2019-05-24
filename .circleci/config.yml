@@ -2,22 +2,25 @@
 version: 2.1
 
 jobs:
-  backend:
+  backend-testing:
     docker:
       - image: circleci/node:lts
     steps:
       - checkout
-      - run: echo "A first hello"
-  frontend:
+      - npm install
+      - npm test
+  frontend-testing:
     docker:
       - image: circleci/node-lts
     steps:
       - checkout
-      - run: echo "A first hello"
+      - cd client
+      - npm install
+      - npm test
 
 workflows:
   version: 2
-  backend_and_frontend:
+  tests:
     jobs:
       - backend
       - frontend

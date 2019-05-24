@@ -15,7 +15,7 @@ jobs:
       - image: circleci/node:lts
     steps:
       - checkout
-      - run: cd client
+      - run: cd ~/project/client
       - run: npm install
       - run: npm test
 

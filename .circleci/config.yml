@@ -3,25 +3,17 @@ version: 2.1
 
 jobs:
   backend-testing:
+    working_directory: ~/opt
     docker:
       - image: circleci/node:lts
+      - image: mongo:latest
     steps:
       - checkout
-      - run:
-        name: Install Dependencies & Test
-        command: npm install
-  frontend-testing:
-    docker:
-      - image: circleci/node-lts
-    steps:
-      - checkout
-      - run:
-        name: Install Dependencies & Test
-        command: echo here
+      - run: npm install
+      - run: npm test
 
 workflows:
   version: 2
   tests_build:
     jobs:
       - backend-testing
-      - frontend-testing

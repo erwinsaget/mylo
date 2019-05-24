@@ -10,47 +10,8 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
 
 Getting up and running is as easy as 1, 2, 3.
 
-1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
-2. Install your dependencies
+Assuming you have docker installed, npm run docker.
 
-    ```
-    cd path/to/mylo; npm install
-    ```
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6e788bde-71f8-474f-9d22-58fda0260351/deploy-status)](https://app.netlify.com/sites/priceless-jones-0095fc/deploys)
 
-3. Start your app
-
-    ```
-    npm start
-    ```
-
-## Testing
-
-Simply run `npm test` and all your tests in the `test/` directory will be run.
-
-## Scaffolding
-
-Feathers has a powerful command line interface. Here are a few things it can do:
-
-```
-$ npm install -g @feathersjs/cli          # Install Feathers CLI
-
-$ feathers generate service               # Generate a new Service
-$ feathers generate hook                  # Generate a new Hook
-$ feathers help                           # Show all commands
-```
-
-## Help
-
-For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
-
-## Changelog
-
-__0.1.0__
-
-- Initial release
-
-## License
-
-Copyright (c) 2018
-
-Licensed under the [MIT license](LICENSE).
+[![CircleCI](https://circleci.com/gh/erwinsaget/mylo/tree/master.svg?style=svg)](https://circleci.com/gh/erwinsaget/mylo/tree/master)

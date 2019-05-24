@@ -11,9 +11,19 @@ jobs:
       - checkout
       - run: npm install
       - run: npm test
+  frontend-testing:
+    working_directory: ~/opt/client
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
 
 workflows:
   version: 2
   tests_build:
     jobs:
       - backend-testing
+      - frontend-testing
+

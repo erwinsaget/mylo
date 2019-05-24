@@ -20,7 +20,7 @@ jobs:
 
 workflows:
   version: 2
-  tests:
+  tests_build:
     jobs:
-      - backend
-      - frontend
+      - backend-testing
+      - frontend-testing

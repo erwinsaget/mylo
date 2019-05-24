@@ -19,5 +19,5 @@ workflows:
   version: 2
   backend_and_frontend:
     jobs:
-      - one
-      - two
+      - backend
+      - frontend

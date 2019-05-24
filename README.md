@@ -4,7 +4,7 @@
 
 ## About
 
-This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Getting Started
 

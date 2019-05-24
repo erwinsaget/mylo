@@ -3,7 +3,7 @@ version: 2.1
 
 jobs:
   backend-testing:
-    working_directory: ~/opt
+    working_directory: ~/project
     docker:
       - image: circleci/node:lts
       - image: mongo:latest
@@ -12,7 +12,7 @@ jobs:
       - run: npm install
       - run: npm test
   frontend-testing:
-    working_directory: ~/opt/client
+    working_directory: ~/project/client
     docker:
       - image: circleci/node:lts
     steps:

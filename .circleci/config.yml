@@ -9,14 +9,15 @@ jobs:
       - checkout
       - run:
         name: Install Dependencies & Test
-        command: npm install && npm test
+        command: npm install
   frontend-testing:
     docker:
       - image: circleci/node-lts
     steps:
+      - checkout
       - run:
         name: Install Dependencies & Test
-        command: cd client && npm install && npm test
+        command: echo here
 
 workflows:
   version: 2

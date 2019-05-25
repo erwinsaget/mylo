@@ -5,5 +5,65 @@
   "paginate": {
     "default": 10,
     "max": 50
-  }
+  },
+  "authentication": {
+    "secret": "ce21e8be478dc175d29c2f945a53780198d6f14d738e3fb2a86b8c8adfd26a1ced45c25c3f628a78b31e8080327c92ab7223b995362cd3c034d5580eea1cd0c709ae2caf97c2b1dff32fc699b949521b8acc497580d078762d03f5a9db4d0afcb015754d5f073a86f7b85b8f8f6e7a89f841ad54b4180e19b6131e0120125692cb6969d5b05cc34899b5bf934c06f500320b99241f7796f27f4ec06942c9d61454c4becb0b1a83cfb6432de97e516e23ed9c716caf0a4d9b0fa451134ab2737991618d84a828b4a1bed314c54c970fe95d36612abfa8d2b11b3f16a7db549278b0ea680fe835da38c713b82cc4f0f098388da21e5b471ba22d685aab16ec1e70",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+    "google": {
+      "clientID": "your google client id",
+      "clientSecret": "your google client secret",
+      "successRedirect": "/",
+      "scope": [
+        "profile openid email"
+      ]
+    },
+    "facebook": {
+      "clientID": "your facebook client id",
+      "clientSecret": "your facebook client secret",
+      "successRedirect": "/",
+      "scope": [
+        "public_profile",
+        "email"
+      ],
+      "profileFields": [
+        "id",
+        "displayName",
+        "first_name",
+        "last_name",
+        "email",
+        "gender",
+        "profileUrl",
+        "birthday",
+        "picture",
+        "permissions"
+      ]
+    },
+    "cookie": {
+      "enabled": true,
+      "name": "feathers-jwt",
+      "httpOnly": false,
+      "secure": false
+    }
+  },
+  "mongodb": "mongodb://localhost:27017/mylo"
 }

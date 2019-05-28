@@ -25,7 +25,7 @@
   "scripts": {
     "client": "cd client && npm start",
     "docker": "docker-compose up",
-    "test": "npm run eslint && NODE_ENV=test npm run mocha",
+    "test": "NODE_ENV=test npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "dev": "nodemon src/",
     "start": "node src/",

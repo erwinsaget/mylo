@@ -2,7 +2,8 @@ const { authenticate } = require('@feathersjs/authentication').hooks;
 const { required } = require('feathers-hooks-common');
 
 const {
-  hashPassword, protect
+  hashPassword,
+  protect
 } = require('@feathersjs/authentication-local').hooks;
 
 module.exports = {

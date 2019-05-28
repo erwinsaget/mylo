@@ -7,8 +7,8 @@ chai.use(chaiHttp);
 
 const app = require('../../src/app');
 
-describe('Logging in', function () {
-  it('User can log in', async function () {
+describe('Logging in', function() {
+  it('User can log in', async function() {
     const email = faker.internet.email();
 
     await app.service('users').create({
@@ -17,14 +17,18 @@ describe('Logging in', function () {
       password: 'password'
     });
 
-    chai.request(app).post('/authentication').send({
-      strategy: 'local',
-      email,
-      password: 'password'
-    }).end(function (err, response) {
-      expect(err).to.be.null;
-      expect(response).to.have.status(201);
-      expect(response.body).to.have.property('accessToken');
-    });
+    chai
+      .request(app)
+      .post('/authentication')
+      .send({
+        strategy: 'local',
+        email,
+        password: 'password'
+      })
+      .end(function(err, response) {
+        expect(err).to.be.null;
+        expect(response).to.have.status(201);
+        expect(response.body).to.have.property('accessToken');
+      });
   });
 });

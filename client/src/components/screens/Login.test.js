@@ -4,15 +4,15 @@ import { MemoryRouter } from 'react-router-dom';
 
 import Login from './Login';
 
-describe('<Login />', function() {
   afterEach(cleanup);
 
   it('renders', () => {
-    const wrapper = render(
+    const { container, getByTestId } = render(
       <MemoryRouter>
         <Login />
-      </MemoryRouter>
+        </MemoryRouter>
     );
+
+
   });
-})
 

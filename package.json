@@ -25,6 +25,7 @@
   "scripts": {
     "client": "cd client && npm start",
     "docker": "docker-compose up",
+    "local": "concurrently 'npm run dev' 'npm run client'",
     "test": "NODE_ENV=test npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "dev": "nodemon src/",
@@ -56,6 +57,7 @@
   "devDependencies": {
     "chai": "4.2.0",
     "chai-http": "4.3.0",
+    "concurrently": "^4.1.0",
     "eslint": "5.16.0",
     "faker": "4.1.0",
     "mocha": "5.2.0",

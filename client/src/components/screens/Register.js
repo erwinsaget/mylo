@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { handleInput } from '../utils';
 import client from '../../feathers';
 
@@ -12,7 +13,9 @@ class Register extends React.Component {
     error: undefined
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    event.preventDefault();
+
     const { name, email, password } = this.state;
 
     users.create({
@@ -30,8 +33,11 @@ class Register extends React.Component {
 
   render() {
     const { name, email, password } = this.state;
+    const { loggedIn } = this.props;
 
-    return (
+    return loggedIn ? (
+      <Redirect to="/home" />
+    ) : (
       <div>
         Register
       <form>

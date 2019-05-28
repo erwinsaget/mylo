@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/screens/Login';
 import Register from './components/screens/Register';
 import Home from './components/screens/Home';
 import NoMatch from './components/screens/NoMatch';
 import Settings from './components/screens/Settings'
+import PrivateRoute from './components/auth/PrivateRoute';
 import client from './feathers';
 import './App.css';
 
@@ -30,17 +31,20 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.login === undefined) {
+    const { login } = this.state;
+
+    if (login === undefined) {
       return (<div>Loading...</div>)
     }
 
     return (
       <Router>
         <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/home" component={Home} />
-          <Route path="/settings" component={Settings} />
+          <Route path="/login" render={() => <Login loggedIn={login} />} />
+          <Route path="/register" render={() => <Register loggedIn={login} />} />
+          <PrivateRoute login={this.state.login} path="/home" component={Home} />
+          <PrivateRoute login={this.state.login} path="/settings" component={Settings} />
+          <Redirect from='/' to='/home' />
           <Route component={NoMatch} />
         </Switch>
       </Router>

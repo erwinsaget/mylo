@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { handleInput } from '../utils'
 import client from '../../feathers'
 
@@ -25,8 +26,11 @@ class Login extends React.Component {
 
   render() {
     const { email, password } = this.state;
+    const { loggedIn } = this.props;
 
-    return (
+    return loggedIn ?  (
+      <Redirect to="/home" />
+    ) : (
       <form>
         {this.state.error && (
           <div>{this.state.error.message}</div>

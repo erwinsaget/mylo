@@ -1,63 +1,44 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { handleInput } from '../utils'
-import client from '../../feathers'
 
 class Login extends React.Component {
-  state = {
-    email: "",
-    password: "",
-    error: undefined
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    const { email, password } = this.state
-
-    client.authenticate({
-      strategy: 'local',
-      email,
-      password
-    }).catch(error => {
-      this.setState({ error })
-    })
-  }
-
   render() {
     const { email, password } = this.state;
     const { loggedIn } = this.props;
 
-    return loggedIn ?  (
-      <Redirect to="/home" />
+    return loggedIn ? (
+      <Redirect to="/h" />
     ) : (
       <form>
-        {this.state.error && (
-          <div>{this.state.error.message}</div>
-        )}
+        {this.state.error && <div>{this.state.error.message}</div>}
         <label>Email</label>
         <input
+          data-testid="email"
           value={email}
           type="text"
           name="email"
           onChange={handleInput.bind(this)}
-          placeholder="Email Address" />
+          placeholder="Email Address"
+        />
         <label>Password</label>
         <input
+          data-testid="password"
           value={password}
           name="password"
           onChange={handleInput.bind(this)}
           type="password"
-          placeholder="Password" />
+          placeholder="Password"
+        />
 
-        <button onClick={this.handleSubmit}>Submit</button>
+        <button data-testid="submit" onClick={this.handleSubmit}>
+          Submit
+        </button>
       </form>
-    )
+    );
   }
 }
 
 Login.defaultProps = {
   login: null
-}
+};
 
 export default Login;

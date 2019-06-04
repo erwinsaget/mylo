@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 function PrivateRoute({ component: Component, login, ...rest }) {
   return (
@@ -12,7 +11,7 @@ function PrivateRoute({ component: Component, login, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: '/signin',
               state: { from: props.location }
             }}
           />
@@ -20,14 +19,6 @@ function PrivateRoute({ component: Component, login, ...rest }) {
       }
     />
   );
-}
-
-PrivateRoute.defaultProps = {
-  login: null
-}
-
-PrivateRoute.propTypes = {
-  login: PropTypes.any.isRequired
 }
 
 export default PrivateRoute;

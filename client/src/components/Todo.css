@@ -1,0 +1,8 @@
+.todo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.completed {
+  text-decoration: line-through;
+}

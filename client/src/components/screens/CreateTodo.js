@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns';
 import ScreenTitle from '../ui/ScreenTitle';
+import { Redirect } from 'react-router-dom';
 import client from '../../feathers';
 
 import './CreateTodo.css';
@@ -9,6 +10,7 @@ function CreateTodo() {
   const [titleInput, setTitleInput] = useState('');
   const [dateInput, setDateInput] = useState(format(new Date(), 'YYYY-MM-DD'));
   const [error, setError] = useState(null);
+  const [routeToHome, setRouteToHome] = useState(false);
 
   const submitForm = () => {
     client
@@ -17,9 +19,13 @@ function CreateTodo() {
         title: titleInput,
         dueOn: format(dateInput, 'MM/DD/YYYY')
       })
+      .then(() => setRouteToHome(true))
       .catch(error => setError(error));
   };
 
+  if (routeToHome === true) {
+    return <Redirect to="/h" />;
+  }
   return (
     <div className="todos-screen">
       <ScreenTitle title="Create Todo" />

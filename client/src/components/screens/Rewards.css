@@ -1,0 +1,23 @@
+.rewards-screen {
+  margin-top: 70px;
+}
+.rewards-circle {
+  background-color: #fff;
+  color: #707070;
+  height: 300px;
+  width: 300px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.rewards-points {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.rewards-text {
+  font-size: 50px;
+}

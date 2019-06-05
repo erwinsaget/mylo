@@ -20,9 +20,7 @@ function Todo(props) {
       ? setClassNames('todo completed')
       : setClassNames('todo');
 
-    const result = await client
-      .service('todos')
-      .patch(todo._id, { completed: newStatus });
+    await client.service('todos').patch(todo._id, { completed: newStatus });
   };
 
   return (

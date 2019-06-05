@@ -13,7 +13,9 @@
 }
 
 .nav {
-  padding: 40px 0;
+  overflow: hidden;
+  padding-top: 40px;
+  padding-bottom: 40px;
   background-color: #6d6775;
   width: 100%;
   display: flex;
@@ -25,4 +27,17 @@
 .nav > a {
   color: #d6d5d5;
   font-size: 20px;
+  margin: 0 -9999rem;
+  /* add back negative margin value */
+  padding: 0.8rem 9999rem;
+  border-radius: 0 3px 3px 0;
+}
+
+.nav > a.active {
+  background: #534f57;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
 }

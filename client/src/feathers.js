@@ -1,17 +1,22 @@
 const feathers = require('@feathersjs/feathers');
-const socketio = require('@feathersjs/socketio-client');
-const io = require('socket.io-client');
+const rest = require('@feathersjs/rest-client');
 const auth = require('@feathersjs/authentication-client');
+const axios = require('axios');
 
-const uri = process.env.NODE_ENV === 'production' ? 'https://api.my-lo.org' : 'localhost:3030';
+const uri =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.my-lo.org'
+    : 'http://localhost:3030';
 
-const socket = io(uri);
+// Connect to a different URL
+const restClient = rest(uri);
 
-const client =
-  feathers()
-    .configure(socketio(socket))
-    .configure(auth({
+const client = feathers()
+  .configure(restClient.axios(axios))
+  .configure(
+    auth({
       storage: window.localStorage
-    }));
+    })
+  );
 
 export default client;

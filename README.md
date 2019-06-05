@@ -10,7 +10,7 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
 
 Getting up and running is as easy as 1, 2, 3.
 
-Assuming you have docker installed, npm run docker.
+Assuming you have docker installed, ```npm run docker```, or if you have mongodb installed, ```npm run local```.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6e788bde-71f8-474f-9d22-58fda0260351/deploy-status)](https://app.netlify.com/sites/priceless-jones-0095fc/deploys)
 

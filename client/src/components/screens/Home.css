@@ -1,0 +1,43 @@
+.home-screen {
+  height: 100vh;
+  width: 100vw;
+  background-color: #39287a;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+}
+
+.sidebar {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  overflow: hidden;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #6d6775;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0 25px 25px 0;
+}
+
+.nav > a {
+  color: #d6d5d5;
+  font-size: 20px;
+  margin: 0 -9999rem;
+  /* add back negative margin value */
+  padding: 0.8rem 9999rem;
+  border-radius: 0 3px 3px 0;
+}
+
+.nav > a.active {
+  background: #534f57;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}

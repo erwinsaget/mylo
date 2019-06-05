@@ -1,0 +1,23 @@
+.pomodoro-screen {
+  margin-top: 70px;
+}
+.pomodoro-circle {
+  background-color: #fff;
+  color: #707070;
+  height: 300px;
+  width: 300px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pomodoro-points {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.pomodoro-text {
+  font-size: 50px;
+}

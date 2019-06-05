@@ -7,7 +7,7 @@ function PrivateRoute({ component: Component, login, ...rest }) {
       {...rest}
       render={props =>
         login ? (
-          <Component {...props} />
+          <Component login={login} {...props} />
         ) : (
           <Redirect
             to={{

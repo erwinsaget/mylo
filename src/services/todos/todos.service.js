@@ -1,7 +1,7 @@
-// Initializes the `users` service on path `/users`
+// Initializes the `todos` service on path `/todos`
 const createService = require('feathers-mongoose');
-const createModel = require('../../models/users.model');
-const hooks = require('./users.hooks');
+const createModel = require('../../models/todos.model');
+const hooks = require('./todos.hooks');
 
 module.exports = function(app) {
   const Model = createModel(app);
@@ -9,15 +9,14 @@ module.exports = function(app) {
 
   const options = {
     Model,
-    paginate,
     multi: process.env.NODE_ENV !== 'production'
   };
 
   // Initialize our service with any options it requires
-  app.use('/users', createService(options));
+  app.use('/todos', createService(options));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service('users');
+  const service = app.service('todos');
 
   service.hooks(hooks);
 };

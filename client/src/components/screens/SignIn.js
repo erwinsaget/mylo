@@ -66,7 +66,7 @@ class SignIn extends React.Component {
     const { loggedIn } = this.props;
 
     return loggedIn ? (
-      <Redirect to="/h" />
+      <Redirect to="/h/todos/" />
     ) : (
       <div className="layout">
         <div className={containerClasses} id="container">

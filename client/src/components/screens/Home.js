@@ -48,7 +48,7 @@ function Home(props) {
         </div>
       </div>
       <main className="main">
-        <Route exact path="/h" component={TodoList} />
+        <Route exact path="/h/todos/:date?" component={TodoList} />
         <Route exact path="/h/new" component={CreateTodo} />
         <Route exact path="/h/collaborations" component={Collaborations} />
         <Route

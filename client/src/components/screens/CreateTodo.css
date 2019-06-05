@@ -1,0 +1,8 @@
+.create-todo-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input {
+  padding: 20px 0;
+}

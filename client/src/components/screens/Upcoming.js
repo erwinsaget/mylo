@@ -8,6 +8,7 @@ import {
   subMonths,
   format,
   getDaysInMonth,
+  getYear,
   getMonth
 } from 'date-fns';
 
@@ -18,7 +19,7 @@ function DayView(props) {
   const [redirectToDayView, setRedirectToDayView] = useState(false);
 
   if (redirectToDayView === true) {
-    console.log('the date is ', day.date, 'inside of dayview');
+    console.log('the date is ', day);
 
     return <Redirect to={`/h/todos/${day.date}`} />;
   }
@@ -41,7 +42,6 @@ function Upcoming() {
 
   useEffect(() => {
     const days = getDaysInMonth(date);
-
     setDaysInMonth(days);
   }, [date]);
 
@@ -49,7 +49,10 @@ function Upcoming() {
     const dayCircles = [];
 
     for (let i = 0; i < numberOfDays; i++) {
-      dayCircles.push({ date: format(date, 'MM-DD-YYYY'), monthIndex: i + 1 });
+      dayCircles.push({
+        date: `${getMonth(date) + 1}-${i + 1}-${getYear(date)}`,
+        monthIndex: i + 1
+      });
     }
 
     return dayCircles;

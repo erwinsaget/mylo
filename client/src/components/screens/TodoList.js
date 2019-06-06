@@ -12,14 +12,6 @@ function TodoList(props) {
   const dateToUse = props.match.params.date
     ? new Date(props.match.params.date)
     : new Date();
-  console.log(
-    'the date is ',
-    props.match.params.date,
-    'but the date to use is ',
-    dateToUse,
-    'also props are ',
-    props.match.params
-  );
   const [date, setDate] = useState(dateToUse);
   const [todos, setTodos] = useState([]);
 

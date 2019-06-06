@@ -66,24 +66,13 @@ class SignIn extends React.Component {
     const { loggedIn } = this.props;
 
     return loggedIn ? (
-      <Redirect to="/h" />
+      <Redirect to="/h/todos/" />
     ) : (
       <div className="layout">
         <div className={containerClasses} id="container">
           <div className="form-container sign-up-container">
             <form>
               <h1>Create Account</h1>
-              <div className="social-container">
-                <a href="#" className="social">
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-google-plus-g" />
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-linkedin-in" />
-                </a>
-              </div>
               <span>or use your email for registration</span>
               {this.state.error && <div>{this.state.error.message}</div>}
               <input
@@ -113,17 +102,6 @@ class SignIn extends React.Component {
           <div className="form-container sign-in-container">
             <form action="#">
               <h1>Sign in</h1>
-              <div className="social-container">
-                <a href="#" className="social">
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-google-plus-g" />
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-linkedin-in" />
-                </a>
-              </div>
               <span>or use your account</span>
               {this.state.error && <div>{this.state.error.message}</div>}
               <input
@@ -140,7 +118,7 @@ class SignIn extends React.Component {
                 type="password"
                 placeholder="Password"
               />
-              <a href="#">Forgot your password?</a>
+              <a href="/password/reset">Forgot your password?</a>
               <button onClick={this.handleLogin}>Sign In</button>
             </form>
           </div>

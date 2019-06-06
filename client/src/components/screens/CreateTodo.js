@@ -9,8 +9,11 @@ import './CreateTodo.css';
 function CreateTodo() {
   const [titleInput, setTitleInput] = useState('');
   const [dateInput, setDateInput] = useState(format(new Date(), 'YYYY-MM-DD'));
+  const [nameInput, setNameInput] = useState('');
   const [error, setError] = useState(null);
   const [routeToHome, setRouteToHome] = useState(false);
+  const [routeToCollaborations, setRouteToCollaborations] = useState(false);
+  const [collaborationsError, setCollaborationsError] = useState(null);
 
   const submitForm = () => {
     client
@@ -23,9 +26,22 @@ function CreateTodo() {
       .catch(error => setError(error));
   };
 
+  const submitNewCollabForm = () => {
+    client
+      .service('todolists')
+      .create({ name: nameInput })
+      .then(() => setRouteToCollaborations(true))
+      .catch(error => setCollaborationsError(error));
+  };
+
   if (routeToHome === true) {
-    return <Redirect to="/h" />;
+    return <Redirect to="/h/todos" />;
   }
+
+  if (routeToCollaborations === true) {
+    return <Redirect to="/h/collaborations" />;
+  }
+
   return (
     <div className="todos-screen">
       <ScreenTitle title="Create Todo" />
@@ -37,34 +53,65 @@ function CreateTodo() {
             submitForm();
           }}
         >
-          {error && (
-            <div>
-              There was an error adding your todo. Please check inputs and try
-              again.
+          <fieldset>
+            <legend>New Todo</legend>
+            {error && (
+              <div>
+                There was an error adding your todo. Please check inputs and try
+                again.
+              </div>
+            )}
+            <div className="form-input">
+              <label>Title</label>
+              <input
+                name="title"
+                type="text"
+                placeholder=""
+                value={titleInput}
+                onChange={e => setTitleInput(e.target.value)}
+              />
             </div>
-          )}
-          <div className="form-input">
-            <label>Title</label>
-            <input
-              name="title"
-              type="text"
-              placeholder=""
-              value={titleInput}
-              onChange={e => setTitleInput(e.target.value)}
-            />
-          </div>
 
-          <div className="form-input">
-            <label>Due On</label>
-            <input
-              name="dueOn"
-              type="date"
-              value={dateInput}
-              onChange={e => setDateInput(e.target.value)}
-            />
-          </div>
+            <div className="form-input">
+              <label>Due On</label>
+              <input
+                name="dueOn"
+                type="date"
+                value={dateInput}
+                onChange={e => setDateInput(e.target.value)}
+              />
+            </div>
 
-          <button type="submit">Create Todo</button>
+            <button type="submit">Create Todo</button>
+          </fieldset>
+        </form>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            submitNewCollabForm();
+          }}
+        >
+          <fieldset>
+            {collaborationsError && (
+              <div>
+                There was an error adding your todo. Please check inputs and try
+                again.
+              </div>
+            )}
+            <legend>New Collaborative Todo List</legend>
+            <div className="form-input">
+              <label>Name for Todo List</label>
+              <input
+                name="name"
+                type="text"
+                placeholder=""
+                value={nameInput}
+                onChange={e => setNameInput(e.target.value)}
+              />
+            </div>
+            <p>You can invite people to this todo list afterwards.</p>
+            <button type="submit">Create Todo List</button>
+          </fieldset>
         </form>
       </div>
     </div>

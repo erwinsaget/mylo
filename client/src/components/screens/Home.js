@@ -5,12 +5,13 @@ import Collaborations from './Collaborations';
 import Rewards from './Rewards';
 import Pomodoro from './Pomodoro';
 import Upcoming from './Upcoming';
+import Todos from './Todos';
 import TodoList from './TodoList';
 import CreateTodo from './CreateTodo';
 import './Home.css';
 
 function Home(props) {
-  const { login } = props;
+  const { login, location } = props;
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
@@ -24,8 +25,13 @@ function Home(props) {
   const logout = () => {
     client.logout().then(window.location.replace('/signin'));
   };
+
   return (
-    <div className="home-screen">
+    <div
+      className={`home-screen ${
+        location.pathname.includes('todolist') ? 'white-bg' : 'purple-bg'
+      }`}
+    >
       <div className="sidebar">
         <img src="/images/mylo_logo-01.png" height="225" alt="brand logo" />
         <div className="nav">
@@ -48,7 +54,7 @@ function Home(props) {
         </div>
       </div>
       <main className="main">
-        <Route exact path="/h" component={TodoList} />
+        <Route exact path="/h/todos/:date?" component={Todos} />
         <Route exact path="/h/new" component={CreateTodo} />
         <Route exact path="/h/collaborations" component={Collaborations} />
         <Route
@@ -58,6 +64,11 @@ function Home(props) {
         />
         <Route exact path="/h/pomodoro" component={Pomodoro} />
         <Route exact path="/h/upcoming" component={Upcoming} />
+        <Route
+          exact
+          path="/h/collaborations/todolist/:id"
+          component={TodoList}
+        />
       </main>
     </div>
   );

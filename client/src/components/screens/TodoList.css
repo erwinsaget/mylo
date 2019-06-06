@@ -1,26 +1,100 @@
-.todos-screen {
-  width: 100%;
+.todolist-screen {
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
-  padding: 0 20px;
   align-items: center;
-  margin-top: 70px;
+  padding: 0 40px;
 }
 
-.todo-list {
-  background-color: #cccccc;
-  color: #707070;
-  width: 75%;
+.todolist-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 40px;
+}
+
+.todolist-header {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.todolist-header-text {
+  font-size: 28px;
+  color: #a0a0a0;
+}
+
+.todolist-column {
+  height: 550px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.todolist-column p {
+  font-size: 28px;
+  font-weight: bold;
+  color: #a0a0a0;
+}
+
+.todolist {
+  padding: 40px;
+  height: 90%;
+  width: 100%;
   border-radius: 25px;
   overflow: scroll;
-  min-height: 500px;
-  max-height: 550px;
-  padding: 40px;
-  margin-top: 25px;
 }
 
-.arrow-svg {
-  height: 25px;
+.todolist-add {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.add-button {
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.plus-svg {
+  height: 50px;
   width: 50px;
-  fill: #84a98c;
+  fill: #fff;
+}
+
+.start {
+  background-color: #443f69;
+  position: relative;
+}
+.in-progress {
+  background-color: #362143;
+}
+.done {
+  background-color: #7c9f84;
+}
+
+.Modal {
+  position: absolute;
+  background-color: #fff;
+  height: 400px;
+  width: 400px;
+  max-width: 500px;
+  max-height: 500px;
+  overflow-y: scroll;
+  border-radius: 25px;
+}
+
+.Overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
 }

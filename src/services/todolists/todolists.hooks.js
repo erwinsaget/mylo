@@ -5,12 +5,14 @@ const {
   restrictToOwner
 } = require('feathers-authentication-hooks');
 
+const addEmailToTodoList = require('../../hooks/add-email-to-todo-list');
+
 module.exports = {
   before: {
     all: [authenticate('jwt')],
-    find: [queryWithCurrentUser({ as: 'owner' })],
-    get: [queryWithCurrentUser({ as: 'owner' })],
-    create: [associateCurrentUser({ as: 'owner' })],
+    find: [],
+    get: [],
+    create: [associateCurrentUser({ as: 'owner' }), addEmailToTodoList()],
     update: [restrictToOwner({ ownerField: 'owner' })],
     patch: [restrictToOwner({ ownerField: 'owner' })],
     remove: [restrictToOwner({ ownerField: 'owner' })]

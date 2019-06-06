@@ -1,3 +1,4 @@
+require('mongoose-type-email');
 // users-model.js - A mongoose model
 //
 // See http://mongoosejs.com/docs/models.html
@@ -6,7 +7,11 @@ module.exports = function(app) {
   const mongooseClient = app.get('mongooseClient');
   const users = new mongooseClient.Schema(
     {
-      email: { type: String, unique: true, lowercase: true },
+      email: {
+        type: mongooseClient.SchemaTypes.Email,
+        unique: true,
+        lowercase: true
+      },
       password: { type: String },
       points: { type: Number, default: 0 },
       googleId: { type: String },

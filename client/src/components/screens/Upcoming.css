@@ -4,4 +4,26 @@
   flex-direction: column;
   padding: 0 20px;
   align-items: center;
+  margin-top: 70px;
+}
+
+.upcoming-list {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 50px 50px 50px;
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+}
+
+.dayView {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 999px;
+  color: #707070;
+  height: 55px;
+  width: 55px;
 }

@@ -1,15 +1,85 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import ScreenTitle from '../ui/ScreenTitle';
+import { ReactComponent as RightArrow } from '../../assets/arrow-right.svg';
+import { ReactComponent as LeftArrow } from '../../assets/arrow-left.svg';
+import {
+  addMonths,
+  subMonths,
+  format,
+  getDaysInMonth,
+  getYear,
+  getMonth
+} from 'date-fns';
 
 import './Upcoming.css';
 
+function DayView(props) {
+  const { day } = props;
+  const [redirectToDayView, setRedirectToDayView] = useState(false);
+
+  if (redirectToDayView === true) {
+    return <Redirect to={`/h/todos/${day.date}`} />;
+  }
+
+  return (
+    <div
+      className="dayView"
+      onClick={() => {
+        setRedirectToDayView(true);
+      }}
+    >
+      {day.monthIndex}
+    </div>
+  );
+}
+
 function Upcoming() {
-  const today = new Date();
-  const date = today.toDateString();
+  const [date, setDate] = useState(new Date());
+  const [daysInMonth, setDaysInMonth] = useState(0);
+
+  useEffect(() => {
+    const days = getDaysInMonth(date);
+    setDaysInMonth(days);
+  }, [date]);
+
+  const createDays = numberOfDays => {
+    const dayCircles = [];
+
+    for (let i = 0; i < numberOfDays; i++) {
+      dayCircles.push({
+        date: `${getMonth(date) + 1}-${i + 1}-${getYear(date)}`,
+        monthIndex: i + 1
+      });
+    }
+
+    return dayCircles;
+  };
+
   return (
     <div className="upcoming-screen">
-      <ScreenTitle title={date} />
-      <div className="todo-list">todos list</div>
+      <ScreenTitle>
+        <div className="title">
+          <button
+            className="titleButton"
+            onClick={() => setDate(subMonths(date, 1))}
+          >
+            <LeftArrow />
+          </button>
+          {format(date, 'MMMM YYYY')}
+          <button
+            className="titleButton"
+            onClick={() => setDate(addMonths(date, 1))}
+          >
+            <RightArrow />
+          </button>
+        </div>
+      </ScreenTitle>
+      <div className="upcoming-list">
+        {createDays(daysInMonth).map(day => (
+          <DayView key={`day-${day.monthIndex}`} day={day} />
+        ))}
+      </div>
     </div>
   );
 }

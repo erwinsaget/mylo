@@ -5,7 +5,7 @@ function NoMatch() {
   return (
     <div>
       Couldn't find what you're looking for.
-      <Link to="/h"> Wanna head back home?</Link>
+      <Link to="/h/todos"> Wanna head back home?</Link>
     </div>
   );
 }

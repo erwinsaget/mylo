@@ -74,3 +74,27 @@
 .done {
   background-color: #7c9f84;
 }
+
+.Modal {
+  position: absolute;
+  background-color: #fff;
+  height: 400px;
+  width: 400px;
+  max-width: 500px;
+  max-height: 500px;
+  overflow-y: scroll;
+  border-radius: 25px;
+}
+
+.Overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}

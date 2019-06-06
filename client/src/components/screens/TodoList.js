@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import ReactModal from 'react-modal';
 import { ReactComponent as RightArrow } from '../../assets/arrow-right.svg';
 import { ReactComponent as LeftArrow } from '../../assets/arrow-left.svg';
 import { addMonths, subMonths, format } from 'date-fns';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
+import CreateTask from '../CreateTask';
 import client from '../../feathers';
 import Task from '../Task';
 
 import './TodoList.css';
 
+ReactModal.setAppElement('#root');
+
 function TodoList(props) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [date, setDate] = useState(new Date());
 
   const [startTasks, setStartTasks] = useState([]);
@@ -63,7 +68,10 @@ function TodoList(props) {
               <div className="task">No Tasks</div>
             )}
             <div className="todolist-add">
-              <button className="add-button">
+              <button
+                className="add-button"
+                onClick={() => setModalIsOpen(true)}
+              >
                 <Plus />
               </button>
             </div>
@@ -91,6 +99,14 @@ function TodoList(props) {
           <p>done</p>
         </div>
       </div>
+      <ReactModal
+        className="Modal"
+        overlayClassName="Overlay"
+        isOpen={modalIsOpen}
+      >
+        <CreateTask />
+        <button onClick={() => setModalIsOpen(false)}>Close Modal</button>
+      </ReactModal>
     </div>
   );
 }

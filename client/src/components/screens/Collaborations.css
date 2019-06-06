@@ -1,3 +1,30 @@
 .collaborations-screen {
   margin-top: 70px;
 }
+
+.collaborations-list {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 50px 50px 50px;
+  grid-column-gap: 20px;
+  grid-row-gap: 120px;
+  overflow: scroll;
+  min-height: 500px;
+}
+
+.collaboration-circle {
+  background-color: #fff;
+  color: #707070;
+  height: 150px;
+  width: 150px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.collaboration-text {
+  font-size: 1rem;
+}

@@ -1,57 +1,112 @@
 import React, { useState, useEffect } from 'react';
+import ReactModal from 'react-modal';
 import { ReactComponent as RightArrow } from '../../assets/arrow-right.svg';
 import { ReactComponent as LeftArrow } from '../../assets/arrow-left.svg';
-import ScreenTitle from '../ui/ScreenTitle';
-import { subDays, addDays, format } from 'date-fns';
-import Todo from '../Todo';
+import { addMonths, subMonths, format } from 'date-fns';
+import { ReactComponent as Plus } from '../../assets/plus.svg';
+import CreateTask from '../CreateTask';
 import client from '../../feathers';
+import Task from '../Task';
 
 import './TodoList.css';
 
+ReactModal.setAppElement('#root');
+
 function TodoList(props) {
-  const dateToUse = props.match.params.date
-    ? new Date(props.match.params.date)
-    : new Date();
-  const [date, setDate] = useState(dateToUse);
-  const [todos, setTodos] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [date, setDate] = useState(new Date());
+
+  const [startTasks, setStartTasks] = useState([]);
+  const [inProgressTasks, setInProgressTasks] = useState([]);
+  const [doneTasks, setDoneTasks] = useState([]);
 
   useEffect(() => {
+    const dueOn = format(date, 'MM/DD/YYYY');
+    const todolistId = props.match.params.id;
+
     client
-      .service('todos')
+      .service('tasks')
       .find({
         query: {
-          dueOn: format(date, 'MM/DD/YYYY')
+          dueOn,
+          todolistId
         }
       })
-      .then(todos => setTodos(todos));
-  }, [date]);
+      .then(tasks => {
+        setStartTasks(tasks.filter(task => task.status === 'start'));
+        setInProgressTasks(tasks.filter(task => task.status === 'in progress'));
+        setDoneTasks(tasks.filter(task => task.status === 'done'));
+      });
+  }, [date, props.match.params.id]);
 
   return (
-    <div className="todos-screen">
-      <ScreenTitle>
-        <div className="title">
+    <div className="todolist-screen">
+      <header className="todolist-header">
+        <div className="">
           <button
             className="titleButton"
-            onClick={() => setDate(subDays(date, 1))}
+            onClick={() => setDate(subMonths(date, 1))}
           >
             <LeftArrow />
           </button>
-          {date.toDateString()}
+          <span className="todolist-header-text">{date.toDateString()}</span>
           <button
             className="titleButton"
-            onClick={() => setDate(addDays(date, 1))}
+            onClick={() => setDate(addMonths(date, 1))}
           >
             <RightArrow />
           </button>
         </div>
-      </ScreenTitle>
-      <div className="todo-list">
-        {todos.length > 0 ? (
-          todos.map(todo => <Todo key={todo._id} todo={todo} />)
-        ) : (
-          <p className="todo">There aren't any todos today.</p>
-        )}
+        <button>invite</button>
+      </header>
+      <div className="todolist-container">
+        <div className="todolist-column">
+          <div className="todolist start">
+            {startTasks.length > 0 ? (
+              startTasks.map(task => <Task key={task._id} task={task} />)
+            ) : (
+              <div className="task">No Tasks</div>
+            )}
+            <div className="todolist-add">
+              <button
+                className="add-button"
+                onClick={() => setModalIsOpen(true)}
+              >
+                <Plus />
+              </button>
+            </div>
+          </div>
+          <p>start</p>
+        </div>
+        <div className="todolist-column">
+          <div className="todolist in-progress">
+            {inProgressTasks.length > 0 ? (
+              inProgressTasks.map(task => <Task key={task._id} task={task} />)
+            ) : (
+              <div className="task">No Tasks</div>
+            )}
+          </div>
+          <p>in progress</p>
+        </div>
+        <div className="todolist-column">
+          <div className="todolist done">
+            {doneTasks.length > 0 ? (
+              doneTasks.map(task => <Task key={task._id} task={task} />)
+            ) : (
+              <div className="task">No Tasks</div>
+            )}
+          </div>
+          <p>done</p>
+        </div>
       </div>
+      <ReactModal
+        className="Modal"
+        overlayClassName="Overlay"
+        isOpen={modalIsOpen}
+      >
+        <CreateTask />
+        <button onClick={() => setModalIsOpen(false)}>Close Modal</button>
+      </ReactModal>
     </div>
   );
 }

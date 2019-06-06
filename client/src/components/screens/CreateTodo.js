@@ -13,6 +13,7 @@ function CreateTodo() {
   const [routeToHome, setRouteToHome] = useState(false);
 
   const submitForm = () => {
+    console.log(format(dateInput, 'MM/DD/YYYY'));
     client
       .service('todos')
       .create({
@@ -24,7 +25,7 @@ function CreateTodo() {
   };
 
   if (routeToHome === true) {
-    return <Redirect to="/h" />;
+    return <Redirect to="/h/todos" />;
   }
   return (
     <div className="todos-screen">

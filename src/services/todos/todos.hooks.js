@@ -1,5 +1,6 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const {
+  associateCurrentUser,
   queryWithCurrentUser,
   restrictToOwner
 } = require('feathers-authentication-hooks');
@@ -9,7 +10,7 @@ module.exports = {
     all: [authenticate('jwt')],
     find: [queryWithCurrentUser({ as: 'owner' })],
     get: [],
-    create: [],
+    create: [associateCurrentUser({ as: 'owner' })],
     update: [restrictToOwner({ ownerField: 'owner' })],
     patch: [restrictToOwner({ ownerField: 'owner' })],
     remove: [restrictToOwner({ ownerField: 'owner' })]

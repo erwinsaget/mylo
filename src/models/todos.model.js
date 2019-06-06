@@ -9,7 +9,7 @@ module.exports = function(app) {
     {
       title: { type: String, required: true },
       completed: { type: Boolean, default: false },
-      dueOn: { type: Date, required: true },
+      dueOn: { type: String, required: true },
       owner: { type: Schema.Types.ObjectId, ref: 'users' }
     },
     {

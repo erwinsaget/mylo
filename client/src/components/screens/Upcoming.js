@@ -19,8 +19,6 @@ function DayView(props) {
   const [redirectToDayView, setRedirectToDayView] = useState(false);
 
   if (redirectToDayView === true) {
-    console.log('the date is ', day);
-
     return <Redirect to={`/h/todos/${day.date}`} />;
   }
 

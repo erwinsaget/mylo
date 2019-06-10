@@ -20,12 +20,9 @@ const authentication = require('./authentication');
 const mongoose = require('./mongoose');
 
 const app = express(feathers());
-const uri =
-  process.env.NODE_ENV === 'production'
-    ? 'https://api.my-lo.org'
-    : 'http://localhost:3000';
+
 var corsOptions = {
-  origin: uri,
+  origin: '*',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 

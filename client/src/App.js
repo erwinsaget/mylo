@@ -1,9 +1,7 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import SignIn from './components/screens/SignIn';
 import Home from './components/screens/Home';
 import NoMatch from './components/screens/NoMatch';
@@ -42,11 +40,13 @@ class App extends React.Component {
 
     return (
       <Router>
-        <Switch>
-          <Route path="/signin" render={() => <SignIn loggedIn={login} />} />
-          <PrivateRoute login={login} path="/h" component={Home} />
-          <Route component={NoMatch} />
-        </Switch>
+        <DragDropContextProvider backend={HTML5Backend}>
+          <Switch>
+            <Route path="/signin" render={() => <SignIn loggedIn={login} />} />
+            <PrivateRoute login={login} path="/h" component={Home} />
+            <Route component={NoMatch} />
+          </Switch>
+        </DragDropContextProvider>
       </Router>
     );
   }

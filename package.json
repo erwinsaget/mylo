@@ -28,7 +28,8 @@
     "local": "concurrently 'npm run dev' 'npm run client'",
     "test": "NODE_ENV=test npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
-    "dev": "nodemon src/",
+    "dev": "nodemon src/ --watch src",
+    "seed": "NODE_ENV=development node src/seeds.js",
     "start": "node src/",
     "mocha": "mocha test/ --recursive --exit"
   },

@@ -15,60 +15,60 @@ async function seed(name, data) {
   });
 }
 
-const userFactory = function(number) {
-  let users = [];
+const factory = function(number, cb) {
+  let data = [];
 
   for (let i = 0; i < number; i++) {
-    let user = {
+    data.push(cb());
+  }
+
+  return data;
+};
+
+const userFactory = function(number) {
+  const createUser = function() {
+    return {
       name: faker.name.findName(),
       email: faker.internet.email(),
       password: 'password'
     };
+  };
 
-    users.push(user);
-  }
-
-  return users;
+  return factory(number, createUser);
 };
 
 const todoFactory = function(number, users) {
-  let todos = [];
-
-  for (let i = 0; i < number; i++) {
-    let todo = {
+  const createTodo = function() {
+    return {
       title: capitalize(faker.lorem.words(random(3, 7))),
       completed: false,
       owner: shuffle(users)[0]._id,
       dueOn: format(new Date(), 'MM/DD/YYYY')
     };
+  };
 
-    todos.push(todo);
-  }
-
-  return todos;
+  return factory(number, createTodo);
 };
 
 const todoListFactory = function(number, users) {
-  let todolists = [];
+  const owner = shuffle(users)[0];
 
-  for (let i = 0; i < number; i++) {
-    let todolist = {
-      name: faker.name.findName(),
-      owner: shuffle(users)[0]._id
+  const createTodoList = function() {
+    return {
+      name: faker.lorem.word(),
+      owner: owner._id,
+      invitedEmails: [owner.email]
     };
+  };
 
-    todolists.push(todolist);
-  }
-
-  return todolists;
+  return factory(number, createTodoList);
 };
 
 const taskFactory = function(number, users, todolists) {
-  const tasks = [];
   const statuses = ['start', 'in progress', 'done'];
 
-  for (let i = 0; i < number; i++) {
-    let task = {
+  const createTask = function() {
+    return {
       title: capitalize(faker.lorem.words(random(3, 7))),
       completed: false,
       status: shuffle(statuses)[0],
@@ -76,11 +76,9 @@ const taskFactory = function(number, users, todolists) {
       todolistId: shuffle(todolists)[0]._id,
       dueOn: format(new Date(), 'MM/DD/YYYY')
     };
+  };
 
-    tasks.push(task);
-  }
-
-  return tasks;
+  return factory(number, createTask);
 };
 
 async function main() {

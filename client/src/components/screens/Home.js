@@ -13,11 +13,16 @@ import './Home.css';
 function Home(props) {
   const { login, location } = props;
   const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       const result = await client.passport.verifyJWT(login.accessToken);
+
+      const user = await client.service('users').get(result.userId);
+
       setUserId(result.userId);
+      setUser(user);
     };
     fetchUserInfo();
   }, [login]);
@@ -56,7 +61,11 @@ function Home(props) {
       <main className="main">
         <Route exact path="/h/todos/:date?" component={Todos} />
         <Route exact path="/h/new" component={CreateTodo} />
-        <Route exact path="/h/collaborations" component={Collaborations} />
+        <Route
+          exact
+          path="/h/collaborations"
+          render={props => <Collaborations user={user} {...props} />}
+        />
         <Route
           exact
           path="/h/rewards"
@@ -67,7 +76,7 @@ function Home(props) {
         <Route
           exact
           path="/h/collaborations/todolist/:id"
-          component={TodoList}
+          render={props => <TodoList user={user} {...props} />}
         />
       </main>
     </div>

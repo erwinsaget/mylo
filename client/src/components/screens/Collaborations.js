@@ -5,15 +5,24 @@ import { Link } from 'react-router-dom';
 
 import './Collaborations.css';
 
-function Collaborations() {
+function Collaborations(props) {
+  const user = props.user;
   const [todolists, setTodoLists] = useState([]);
 
   useEffect(() => {
+    if (!user) return;
+
     client
       .service('todolists')
-      .find()
+      .find({
+        query: {
+          invitedEmails: {
+            $in: user.email
+          }
+        }
+      })
       .then(todolists => setTodoLists(todolists.data));
-  }, []);
+  }, [user]);
 
   return (
     <div className="collaborations-screen">

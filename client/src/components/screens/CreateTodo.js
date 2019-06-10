@@ -44,7 +44,7 @@ function CreateTodo() {
 
   return (
     <div className="todos-screen">
-      <ScreenTitle title="Create Todo" />
+      <ScreenTitle title="Create To-do" />
       <div className="todo-list">
         <form
           className="create-todo-form"
@@ -54,11 +54,11 @@ function CreateTodo() {
           }}
         >
           <fieldset>
-            <legend>New Todo</legend>
+            <legend>New To-do</legend>
             {error && (
               <div>
-                There was an error adding your todo. Please check inputs and try
-                again.
+                There was an error adding your to-do. Please check inputs and
+                try again.
               </div>
             )}
             <div className="form-input">
@@ -82,7 +82,7 @@ function CreateTodo() {
               />
             </div>
 
-            <button type="submit">Create Todo</button>
+            <button type="submit">Create To-do</button>
           </fieldset>
         </form>
         <form
@@ -94,13 +94,13 @@ function CreateTodo() {
           <fieldset>
             {collaborationsError && (
               <div>
-                There was an error adding your todo. Please check inputs and try
-                again.
+                There was an error adding your to-do. Please check inputs and
+                try again.
               </div>
             )}
-            <legend>New Collaborative Todo List</legend>
+            <legend>New Collaborative To-do List</legend>
             <div className="form-input">
-              <label>Name for Todo List</label>
+              <label>Name for To-do List</label>
               <input
                 name="name"
                 type="text"
@@ -109,8 +109,8 @@ function CreateTodo() {
                 onChange={e => setNameInput(e.target.value)}
               />
             </div>
-            <p>You can invite people to this todo list afterwards.</p>
-            <button type="submit">Create Todo List</button>
+            <p>You can invite people to this to-do list afterwards.</p>
+            <button type="submit">Create To-do List</button>
           </fieldset>
         </form>
       </div>

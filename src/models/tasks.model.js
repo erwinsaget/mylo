@@ -5,10 +5,12 @@
 module.exports = function(app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
+
   const tasks = new Schema(
     {
       title: { type: String, required: true },
       completed: { type: Boolean, default: false },
+      points: { type: Number, default: 0 },
       dueOn: { type: String, required: true },
       owner: { type: Schema.Types.ObjectId, ref: 'users' },
       todolistId: { type: Schema.Types.ObjectId, ref: 'todolists' },

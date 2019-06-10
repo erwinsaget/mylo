@@ -51,10 +51,13 @@ const todoFactory = function(number, users) {
 };
 
 const todoListFactory = function(number, users) {
+  const owner = shuffle(users)[0];
+
   const createTodoList = function() {
     return {
       name: faker.lorem.word(),
-      owner: shuffle(users)[0]._id
+      owner: owner._id,
+      invitedEmails: [owner.email]
     };
   };
 

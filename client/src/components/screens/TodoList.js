@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
+import { addMonths, subMonths, format } from 'date-fns';
 import { ReactComponent as RightArrow } from '../../assets/arrow-right.svg';
 import { ReactComponent as LeftArrow } from '../../assets/arrow-left.svg';
-import { addMonths, subMonths, format } from 'date-fns';
-import { ReactComponent as Plus } from '../../assets/plus.svg';
 import CreateTask from '../CreateTask';
 import client from '../../feathers';
 import Task from '../Task';
+import StartTodoList from '../ui/StartTodoList';
 
 import './TodoList.css';
 
 ReactModal.setAppElement('#root');
+
+// const updateStatus = function(id, status) {
+//   client.service('tasks').patch(id, {
+//     query: {
+//       status: status
+//     }
+//   })
+// }
 
 function TodoList(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -61,21 +69,10 @@ function TodoList(props) {
       </header>
       <div className="todolist-container">
         <div className="todolist-column">
-          <div className="todolist start">
-            {startTasks.length > 0 ? (
-              startTasks.map(task => <Task key={task._id} task={task} />)
-            ) : (
-              <div className="task">No Tasks</div>
-            )}
-            <div className="todolist-add">
-              <button
-                className="add-button"
-                onClick={() => setModalIsOpen(true)}
-              >
-                <Plus />
-              </button>
-            </div>
-          </div>
+          <StartTodoList
+            startTasks={startTasks}
+            setModalIsOpen={setModalIsOpen}
+          />
           <p>start</p>
         </div>
         <div className="todolist-column">

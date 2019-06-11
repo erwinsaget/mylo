@@ -1,7 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { DragDropContextProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
 import SignIn from './components/screens/SignIn';
 import Home from './components/screens/Home';
 import NoMatch from './components/screens/NoMatch';

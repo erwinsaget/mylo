@@ -38,13 +38,11 @@ class App extends React.Component {
 
     return (
       <Router>
-        <DragDropContextProvider backend={HTML5Backend}>
           <Switch>
             <Route path="/signin" render={() => <SignIn loggedIn={login} />} />
             <PrivateRoute login={login} path="/h" component={Home} />
             <Route component={NoMatch} />
           </Switch>
-        </DragDropContextProvider>
       </Router>
     );
   }

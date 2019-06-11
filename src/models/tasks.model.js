@@ -13,6 +13,7 @@ module.exports = function(app) {
       points: { type: Number, default: 0 },
       dueOn: { type: String, required: true },
       owner: { type: Schema.Types.ObjectId, ref: 'users' },
+      assignee: { type: String },
       todolistId: { type: Schema.Types.ObjectId, ref: 'todolists' },
       status: {
         type: String,

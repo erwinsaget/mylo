@@ -158,6 +158,7 @@ function TodoList(props) {
             />
           </div>
           <button onClick={sendInvite}>Send Invite</button>
+          <button onClick={() => setShowInviteForm(false)}>Cancel</button>
         </form>
       </ReactModal>
       <ReactModal

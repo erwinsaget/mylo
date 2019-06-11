@@ -3,9 +3,11 @@ import { format } from 'date-fns';
 import client from '../feathers';
 
 function CreateTask(props) {
+  const todolist = props.todolist;
   const [title, setTitleInput] = useState('');
   const [date, setDateInput] = useState(format(new Date(), 'YYYY-MM-DD'));
   const [points, setPoints] = useState(0);
+  const [assignee, setAssignee] = useState('');
   const [error, setError] = useState(null);
 
   const submitForm = e => {
@@ -19,7 +21,8 @@ function CreateTask(props) {
         points,
         dueOn: format(date, 'MM/DD/YYYY'),
         status: 'start',
-        todolistId: props.todolist._id
+        todolistId: props.todolist._id,
+        assignee: assignee
       })
       .then(res => {
         props.addTask(res);
@@ -67,6 +70,17 @@ function CreateTask(props) {
           value={points}
           onChange={e => setPoints(e.target.value)}
         />
+      </div>
+
+      <div className="form-input">
+        <label>Assignee</label>
+        <select value={assignee} onChange={e => setAssignee(e.target.value)}>
+          {todolist.invitedEmails.map((email, index) => (
+            <option key={`email${index}`} value={email}>
+              {email}
+            </option>
+          ))}
+        </select>
       </div>
       <button type="submit" onClick={submitForm}>
         Create Todo

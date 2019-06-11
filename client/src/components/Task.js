@@ -1,5 +1,4 @@
 import React from 'react';
-import client from '../feathers';
 
 import './Task.css';
 
